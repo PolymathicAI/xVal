@@ -1,11 +1,9 @@
 # %%
 import sys, os
 
-sys.path.append("..")
 from rebound_sim import construct_example
 import numpy as np
 import uuid
-from tqdm import tqdm
 
 path = "."
 os.makedirs(path, exist_ok=True)
