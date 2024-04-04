@@ -56,8 +56,8 @@ class Numformer(nn.Module):
         self.is_causal = is_causal
 
     def forward(self, x, x_num):
-        x = self.token_embed(x) + self.position_embed.weight[: x.shape[1]].unsqueeze(0)
-        x = x * x_num.unsqueeze(-1)
+        x = self.token_embed(x) * x_num.unsqueeze(-1)
+        x = x + self.position_embed.weight[: x.shape[1]].unsqueeze(0)
         x = self.encoder_stack(x, is_causal=self.is_causal)
         logit_preds = self.lm_head(x)
         num_preds = self.num_head(x)
